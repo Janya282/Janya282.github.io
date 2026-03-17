@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Janya.Portfolio – UX designs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="page">
+      <header class="topbar">
+        <div class="topbar-inner">
+          <div class="topbar-logo">&gt;_ Janya.Portfolio</div>
+          <nav class="topbar-nav">
+            <a href="./home.html" class="topbar-link">Home</a>
+            <a href="./about.html" class="topbar-link">About Me</a>
+            <a href="./projects.html" class="topbar-link topbar-link--active"
+              >Projects</a
+            >
+            <a href="./contact.html" class="topbar-link">Contact</a>
+          </nav>
+        </div>
+        <div class="topbar-underline"></div>
+      </header>
+
+      <main class="project-detail-page">
+        <p class="projects-kicker">PROJECTS</p>
+
+        <section class="project-detail-shell" aria-label="UX designs detail">
+          <div class="project-detail-left">
+            <div class="project-detail-image project-detail-image--ux" aria-hidden="true"></div>
+          </div>
+
+          <div class="project-detail-right">
+            <a class="project-detail-close" href="./projects.html" aria-label="Close">
+              ×
+            </a>
+
+            <h1 class="project-detail-title">UX designs</h1>
+            <p class="project-detail-subtitle">UX explorations &amp; prototypes</p>
+
+            <div class="project-detail-rule"></div>
+
+            <div class="project-detail-desc">
+              <p class="project-detail-desc-title">Description.txt</p>
+              <p class="project-detail-desc-body">
+                A collection of UX work including research notes, flows, and
+                interactive wireframes. This page is a placeholder until we link
+                the specific case studies and prototypes.
+              </p>
+            </div>
+
+            <div class="project-detail-rule"></div>
+
+            <div class="project-detail-toolkit">
+              <div class="project-detail-toolkit-row">
+                <span class="project-detail-toolkit-icon" aria-hidden="true">⌁</span>
+                <span class="project-detail-toolkit-label">ToolKit</span>
+              </div>
+              <div class="project-detail-tags">
+                <span class="project-detail-tag">Figma</span>
+                <span class="project-detail-tag">Docs</span>
+                <span class="project-detail-tag">Axure</span>
+              </div>
+            </div>
+
+            <div class="project-detail-rule"></div>
+
+            <div class="project-detail-actions">
+              <a
+                class="fun-button"
+                href="https://www.behance.net/janyawalia565"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open interactive project (placeholder)"
+              >
+                <span class="fun-button-dot" aria-hidden="true"></span>
+                <span>View interactive</span>
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer" aria-label="Footer">
+        <div class="site-footer-inner">
+          <p class="site-footer-text">
+            © <span id="year"></span> Janya Walia <span class="site-footer-note">— built with care.</span>
+          </p>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
+

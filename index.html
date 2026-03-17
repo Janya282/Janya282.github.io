@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Janya.Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const { useState } = React;
+
+      const imgGitHub =
+        "https://www.figma.com/api/mcp/asset/7474ca27-4bc0-4818-b2fd-2f9de5585f4c";
+      const imgBehance =
+        "https://www.figma.com/api/mcp/asset/38d34f54-c9d7-4200-9575-e51f7ab0ca65";
+      const imgLinkedin =
+        "https://www.figma.com/api/mcp/asset/7e1c950c-c912-45c3-962d-908ad41445e5";
+
+      const imgLsps =
+        "https://www.figma.com/api/mcp/asset/3d64243f-17b6-4f78-ad98-5308403c5d4c";
+      const imgSpaceInvaders =
+        "https://www.figma.com/api/mcp/asset/7dc54f66-6f88-46a7-bd88-b271f03e8dbe";
+      const imgBulletin =
+        "https://www.figma.com/api/mcp/asset/6ef252dc-7819-4a2c-b952-abcb5e6aa41e";
+      const imgModeling =
+        "https://www.figma.com/api/mcp/asset/41cd0714-2049-4841-8ff8-def5b49e1cff";
+      const imgCarRental =
+        "https://www.figma.com/api/mcp/asset/c45f1567-74a6-4f01-9273-33dd8de1a0c1";
+
+      function ContactPage() {
+        return (
+          <main className="contact-page">
+            <section className="contact-hero" aria-labelledby="contact-heading">
+              <h1 id="contact-heading" className="contact-title">
+                GET_IN_TOUCH
+              </h1>
+              <p className="contact-subtitle">
+                Feel free to get in touch and also check out my portfolio&apos;s
+                on GITHUB and Behance!
+              </p>
+            </section>
+
+            <section className="contact-grid">
+              <div className="contact-column">
+                <article className="contact-card">
+                  <div className="contact-card-icon contact-card-icon--mail">
+                    <span className="icon-mail" aria-hidden="true" />
+                  </div>
+                  <div>
+                    <p className="contact-card-label">Email Me</p>
+                    <a
+                      href="mailto:janyawalia282@gmail.com"
+                      className="contact-card-value"
+                    >
+                      janyawalia282@gmail.com
+                    </a>
+                  </div>
+                </article>
+
+                <article className="contact-card">
+                  <div className="contact-card-icon contact-card-icon--pin">
+                    <span className="icon-pin" aria-hidden="true" />
+                  </div>
+                  <div>
+                    <p className="contact-card-label">Based In</p>
+                    <p className="contact-card-value">Waterloo, ON</p>
+                  </div>
+                </article>
+              </div>
+
+              <article className="contact-links-card">
+                <p className="contact-links-title">Links</p>
+                <ul className="contact-links-list">
+                  <li>
+                    <a
+                      href="https://www.linkedin.com"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="contact-link-row"
+                    >
+                      <img
+                        src={imgLinkedin}
+                        alt=""
+                        className="contact-link-icon"
+                      />
+                      <span>LinkedIn</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://github.com"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="contact-link-row"
+                    >
+                      <img
+                        src={imgGitHub}
+                        alt=""
+                        className="contact-link-icon"
+                      />
+                      <span>Github</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://www.behance.net"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="contact-link-row"
+                    >
+                      <img
+                        src={imgBehance}
+                        alt=""
+                        className="contact-link-icon"
+                      />
+                      <span>Behance</span>
+                    </a>
+                  </li>
+                </ul>
+              </article>
+            </section>
+          </main>
+        );
+      }
+
+      function HomePage() {
+        return (
+          <main className="home-page">
+            <section className="home-hero">
+              <p className="home-eyebrow">{">_ Home"}</p>
+              <h1 className="home-title">
+                Digital designer &amp;{" "}
+                <span className="home-title-em">frontend developer</span>
+              </h1>
+              <p className="home-body">
+                I design and build playful, precise interfaces with a focus on
+                motion, systems, and small details that feel just right.
+              </p>
+            </section>
+
+            <section className="home-meta-row">
+              <article className="home-card">
+                <p className="home-card-label">Email Me</p>
+                <p className="home-card-value">janyawalia282@gmail.com</p>
+              </article>
+
+              <article className="home-card">
+                <p className="home-card-label">Based In</p>
+                <p className="home-card-value">Waterloo, ON</p>
+              </article>
+
+              <article className="home-card">
+                <p className="home-card-label">Currently</p>
+                <p className="home-card-value">Exploring portfolio UX &amp; UI</p>
+              </article>
+            </section>
+          </main>
+        );
+      }
+
+      function ProjectsPage() {
+        return (
+          <main className="projects-page">
+            <section className="projects-hero">
+              <p className="projects-kicker">PROJECTS</p>
+            </section>
+
+            <section className="projects-grid">
+              <article className="project-card">
+                <img src={imgLsps} alt="" className="project-image" />
+                <div className="project-content">
+                  <h2 className="project-title">LSPS Website</h2>
+                  <p className="project-body">
+                    Developed a custom website for my club, Laurier STEM
+                    Publishing Society to host and distribute student-led STEM
+                    content.
+                  </p>
+                  <div className="project-tags">
+                    <span className="project-tag">Figma</span>
+                    <span className="project-tag">HTML/CSS</span>
+                    <span className="project-tag">Javascript</span>
+                  </div>
+                </div>
+              </article>
+
+              <article className="project-card">
+                <img src={imgSpaceInvaders} alt="" className="project-image" />
+                <div className="project-content">
+                  <h2 className="project-title">Space Invaders</h2>
+                  <p className="project-body">
+                    Recreation of space invaders using custom drawn pixels and
+                    animations in Java.
+                  </p>
+                  <div className="project-tags">
+                    <span className="project-tag">Processing</span>
+                    <span className="project-tag">Java</span>
+                    <span className="project-tag">Pixel Art</span>
+                  </div>
+                </div>
+              </article>
+
+              <article className="project-card">
+                <img src={imgBulletin} alt="" className="project-image" />
+                <div className="project-content">
+                  <h2 className="project-title">Bulletin Board Server</h2>
+                  <p className="project-body">
+                    Client–server application using Java stream sockets.
+                    Simulates a networked bulletin board that supports multiple
+                    concurrent clients on a centralized server.
+                  </p>
+                  <div className="project-tags">
+                    <span className="project-tag">Visual Studio</span>
+                    <span className="project-tag">Java</span>
+                  </div>
+                </div>
+              </article>
+
+              <article className="project-card">
+                <div className="project-image project-image--ux" />
+                <div className="project-content">
+                  <h2 className="project-title">UX designs</h2>
+                  <p className="project-body">
+                    A collection of UX explorations, wireflows, and prototypes.
+                  </p>
+                  <div className="project-tags">
+                    <span className="project-tag">Figma</span>
+                    <span className="project-tag">Docs</span>
+                    <span className="project-tag">Axure</span>
+                  </div>
+                </div>
+              </article>
+
+              <article className="project-card">
+                <img src={imgModeling} alt="" className="project-image" />
+                <div className="project-content">
+                  <h2 className="project-title">3D Modeling</h2>
+                  <p className="project-body">
+                    A gallery of 3D experiments. I use these side projects to
+                    explore my interest in art, creating assets that add depth
+                    and interactivity to the digital world!
+                  </p>
+                  <div className="project-tags">
+                    <span className="project-tag">Blender</span>
+                    <span className="project-tag">Spline</span>
+                    <span className="project-tag">3D Rendering</span>
+                  </div>
+                </div>
+              </article>
+
+              <article className="project-card">
+                <img src={imgCarRental} alt="" className="project-image" />
+                <div className="project-content">
+                  <h2 className="project-title">Car Rental System</h2>
+                  <p className="project-body">
+                    Designed and implemented a car rental software system by
+                    following the scrum process.
+                  </p>
+                  <div className="project-tags">
+                    <span className="project-tag">Figma</span>
+                    <span className="project-tag">Git</span>
+                    <span className="project-tag">SQL</span>
+                  </div>
+                </div>
+              </article>
+            </section>
+          </main>
+        );
+      }
+
+      function App() {
+        const [page, setPage] = useState("home");
+
+        return (
+          <div className="page">
+            <header className="topbar">
+              <div className="topbar-inner">
+                <div className="topbar-logo">{">_ Janya.Portfolio"}</div>
+                <nav className="topbar-nav">
+                  <button
+                    className={
+                      "topbar-link" + (page === "home" ? " topbar-link--active" : "")
+                    }
+                    onClick={() => setPage("home")}
+                  >
+                    Home
+                  </button>
+                  <button className="topbar-link" type="button">
+                    About Me
+                  </button>
+                  <button
+                    className={
+                      "topbar-link" +
+                      (page === "projects" ? " topbar-link--active" : "")
+                    }
+                    type="button"
+                    onClick={() => setPage("projects")}
+                  >
+                    Projects
+                  </button>
+                  <button
+                    className={
+                      "topbar-link" +
+                      (page === "contact" ? " topbar-link--active" : "")
+                    }
+                    onClick={() => setPage("contact")}
+                  >
+                    Contact
+                  </button>
+                </nav>
+              </div>
+              <div className="topbar-underline" />
+            </header>
+
+            {page === "home" && <HomePage />}
+            {page === "projects" && <ProjectsPage />}
+            {page === "contact" && <ContactPage />}
+          </div>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
+

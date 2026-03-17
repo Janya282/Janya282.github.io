@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Janya.Portfolio – About Me</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="page">
+      <header class="topbar">
+        <div class="topbar-inner">
+          <div class="topbar-logo">&gt;_ Janya.Portfolio</div>
+          <nav class="topbar-nav">
+            <a href="./home.html" class="topbar-link">Home</a>
+            <a href="./about.html" class="topbar-link topbar-link--active"
+              >About Me</a
+            >
+            <a href="./projects.html" class="topbar-link">Projects</a>
+            <a href="./contact.html" class="topbar-link">Contact</a>
+          </nav>
+        </div>
+        <div class="topbar-underline"></div>
+      </header>
+
+      <main class="about-page">
+        <section class="about-hero" aria-label="About header">
+          <p class="projects-kicker about-kicker">ABOUT_ME</p>
+        </section>
+
+        <section class="about-top" aria-label="About overview">
+          <div class="about-top-grid">
+            <div class="about-photo-card" aria-label="Portrait">
+              <div class="about-photo" role="img" aria-label="Portrait placeholder"></div>
+              <div class="about-photo-corner" aria-hidden="true"></div>
+            </div>
+
+            <div class="about-terminal-card" aria-label="Bio terminal">
+              <div class="about-terminal-line about-terminal-line--cmd">
+                <span class="about-terminal-prompt">+</span>
+                <span class="about-terminal-cmd">cat bio.txt</span>
+              </div>
+              <p class="about-terminal-paragraph">
+                ’I'm a full stack software engineer who leans design first. I enjoy building
+                complete systems, but I care a lot about how they look 
+                and feel to the user and brand, as well as how they function.
+              </p>
+              <p class="about-terminal-paragraph">
+                With a background in computer science and a love for building
+                systems, I enjoy working where structure meets creativity, clean code and 
+                interfaces, thoughtful motion, and cohesive design.
+              </p>
+              <div class="about-terminal-line about-terminal-line--cmd">
+                <span class="about-terminal-prompt">+</span>
+                <span class="about-terminal-cmd">echo $CURRENT_STATUS</span>
+              </div>
+              <p class="about-terminal-status">
+                “Designing digital solutions for the future.”
+              </p>
+            </div>
+          </div>
+
+          <div class="about-stats" aria-label="Quick stats">
+            <div class="about-stat">
+              <p class="about-stat-label">EXP</p>
+              <p class="about-stat-value">3_YEARS</p>
+            </div>
+            <div class="about-stat">
+              <p class="about-stat-label">ROLE</p>
+              <p class="about-stat-value about-stat-value--pink">FULLSTACK_ENG</p>
+            </div>
+            <div class="about-stat">
+              <p class="about-stat-label">Qualifications</p>
+              <p class="about-stat-value about-stat-value--green">Honours B.S. Computer Science</p>
+              <p class="about-stat-value about-stat-value--green">User Experience Design Minor</p>
+            </div>
+            <div class="about-stat">
+              <p class="about-stat-label">STATUS</p>
+              <p class="about-stat-value about-stat-value--blue">OPEN_TO_WORK</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="about-logs" aria-label="System logs">
+          <h1 class="about-logs-title">
+            <span class="about-logs-prompt">&gt;_</span> SYSTEM_LOGS
+          </h1>
+
+          <ol class="about-timeline" aria-label="Timeline">
+            <li class="about-timeline-item">
+              <div class="about-timeline-marker" aria-hidden="true"></div>
+              <div class="about-timeline-year">2025</div>
+              <div class="about-timeline-content">
+                <p class="about-timeline-heading">A to Z Tutoring</p>
+                <p class="about-timeline-body">
+                  Provided academic support for coding, math and english to kids.
+                </p>
+              </div>
+            </li>
+
+            <li class="about-timeline-item">
+              <div class="about-timeline-marker" aria-hidden="true"></div>
+              <div class="about-timeline-year">2025-2026</div>
+              <div class="about-timeline-content">
+                <p class="about-timeline-heading">Wilfrid Laurier University - Academic Tutor</p>
+                <p class="about-timeline-body">
+                  Contributed and made sure students understood the content for CP104.
+                </p>
+              </div>
+            </li>
+
+            <li class="about-timeline-item">
+              <div class="about-timeline-marker" aria-hidden="true"></div>
+              <div class="about-timeline-year">2025-2026</div>
+              <div class="about-timeline-content">
+                <p class="about-timeline-heading"> Laurier STEM Publishing Society - VP of Web Development</p>
+                <p class="about-timeline-body">
+                  Led the design, development and maintenance of the club's website.
+                </p>
+              </div>
+            </li>
+
+            <li class="about-timeline-item">
+              <div class="about-timeline-marker" aria-hidden="true"></div>
+              <div class="about-timeline-year">2027</div>
+              <div class="about-timeline-content">
+                <p class="about-timeline-heading">Honours B.S. Computer Science + UX Minor</p>
+                <p class="about-timeline-body">
+                  Graduated with honors. Focused on distributed systems and web
+                  technologies.
+                </p>
+              </div>
+            </li>
+          </ol>
+        </section>
+      </main>
+
+      <footer class="site-footer" aria-label="Footer">
+        <div class="site-footer-inner">
+          <p class="site-footer-text">
+            © <span id="year"></span> Janya Walia <span class="site-footer-note">— built with care.</span>
+          </p>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
+

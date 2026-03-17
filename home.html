@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Janya.Portfolio – Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:wght@400;500;700&family=Anonymous+Pro:wght@400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="page home-figma">
+      <header class="topbar" aria-label="Primary navigation">
+        <div class="topbar-inner">
+          <div class="topbar-logo">&gt;_ Janya.Portfolio</div>
+          <nav class="topbar-nav">
+            <a href="./home.html" class="topbar-link topbar-link--active">Home</a>
+            <a href="./about.html" class="topbar-link">About Me</a>
+            <a href="./projects.html" class="topbar-link">Projects</a>
+            <a href="./contact.html" class="topbar-link">Contact</a>
+          </nav>
+        </div>
+        <div class="topbar-underline"></div>
+      </header>
+
+      <main class="home-canvas" aria-label="Homepage">
+        <div class="home-grid" aria-hidden="true"></div>
+        <img
+          class="home-noise-image"
+          src="https://www.figma.com/api/mcp/asset/0408a181-4e1b-4c43-937e-113053cdfba4"
+          alt=""
+        />
+
+        <section class="home-hero-absolute" aria-label="Hero">
+          <div class="home-system-online">
+            <span class="home-system-dot" aria-hidden="true"></span>
+            <span class="home-system-text">System Online</span>
+          </div>
+
+          <h1 class="home-creative-developer">
+            <span class="home-creative-developer--white">CREATIVE </span>
+            <span class="home-creative-developer--gradient">DEVELOPER</span>
+          </h1>
+
+          <p class="home-welcome">Hi! Welcome to my portfolio website.</p>
+
+          <a class="home-intro-button" href="#introduction">
+            <span>Introduction</span>
+            <img
+              class="home-intro-arrow"
+              src="https://www.figma.com/api/mcp/asset/fab08e9d-c6b3-4a4d-adcb-a0e025c4f504"
+              alt=""
+            />
+          </a>
+        </section>
+
+        <section
+          id="introduction"
+          class="home-introduction"
+          aria-label="Introduction"
+        >
+          <h2 class="home-introduction-title">Introduction</h2>
+          <div class="home-introduction-underline" aria-hidden="true"></div>
+
+          <div class="home-intro-cards">
+            <article class="home-intro-card home-intro-card--who">
+              <div class="home-intro-card-icon">
+                <div class="home-intro-card-icon-bg"></div>
+                <img
+                  class="home-intro-card-icon-img"
+                  src="https://www.figma.com/api/mcp/asset/fe6d4740-ecee-4268-a22d-8e3f7e4b8f04"
+                  alt=""
+                />
+              </div>
+              <h3 class="home-intro-card-title">Who I am</h3>
+              <div class="home-intro-card-body">
+                A passionate developer &amp; designer with a love for projects
+                that are functional, helpful and eye catching.
+              </div>
+            </article>
+
+            <article class="home-intro-card home-intro-card--what">
+              <div class="home-intro-card-icon">
+                <div class="home-intro-card-icon-bg"></div>
+                <img
+                  class="home-intro-card-icon-img"
+                  src="https://www.figma.com/api/mcp/asset/d8b19fdd-ab90-4a44-b164-0922c96a26a7"
+                  alt=""
+                />
+              </div>
+              <h3 class="home-intro-card-title">What I Do</h3>
+              <div class="home-intro-card-body">
+                <ul class="home-intro-card-list">
+                  <li>Full Stack Web Development</li>
+                  <li>UX Research</li>
+                  <li>Visual/UX Design</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="home-intro-card home-intro-card--beyond">
+              <div class="home-intro-card-icon">
+                <div class="home-intro-card-icon-bg"></div>
+                <img
+                  class="home-intro-card-icon-img"
+                  src="https://www.figma.com/api/mcp/asset/c4e9236d-8f3e-4b49-b1e4-a7e43bd4bdda"
+                  alt=""
+                />
+              </div>
+              <h3 class="home-intro-card-title">Beyond The Code</h3>
+              <div class="home-intro-card-body">
+                <p class="home-intro-card-body-line">
+                  When I’m not coding, I like to:
+                </p>
+                <ul class="home-intro-card-list">
+                  <li>Design 3D elements</li>
+                  <li>
+                    fulfill my role as a web developer for
+                    <a
+                      class="home-inline-link"
+                      href="https://laurierstempublishingsociety.github.io/"
+                      target="_blank"
+                      rel="noreferrer"
+                      >LSPS</a
+                    >
+                  </li>
+                  <li>Tutoring younger years</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer" aria-label="Footer">
+        <div class="site-footer-inner">
+          <p class="site-footer-text">
+            © <span id="year"></span> Janya Walia <span class="site-footer-note">— built with care.</span>
+          </p>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      const introBtn = document.querySelector(".home-intro-button");
+      introBtn?.addEventListener("click", (e) => {
+        e.preventDefault();
+        const target = document.getElementById("introduction");
+        if (!target) return;
+
+        const prefersReduced = window.matchMedia?.(
+          "(prefers-reduced-motion: reduce)"
+        )?.matches;
+
+        target.scrollIntoView({
+          behavior: prefersReduced ? "auto" : "smooth",
+          block: "start"
+        });
+      });
+    </script>
+  </body>
+</html>
+
