@@ -56,20 +56,23 @@ body {
 
 .site-footer-text {
   margin: 0;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--text-muted);
   letter-spacing: 0.02em;
 }
 
 .site-footer-prompt {
   font-family: "VT323", monospace;
+  font-size: 16px;
   color: #ff69b4;
 }
 
 .site-footer-cursor {
   display: inline-block;
-  width: 8px;
+  width: 10px;
+  height: 1em;
   margin-left: 4px;
+  vertical-align: -0.1em;
   background-color: #e5e7eb;
   animation: footer-cursor-blink 1s steps(2, start) infinite;
 }
