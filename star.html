@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Janya.Portfolio – Home</title>
+    <title>Janya.Portfolio – Leave a Star</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="./styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -13,16 +13,16 @@
     />
   </head>
   <body>
-    <div class="page home-figma">
+    <div class="page">
       <header class="topbar" aria-label="Primary navigation">
         <div class="topbar-inner">
           <div class="topbar-logo">&gt;_ Janya.Portfolio</div>
           <nav class="topbar-nav">
-            <a href="./index.html" class="topbar-link topbar-link--active">Home</a>
+            <a href="./index.html" class="topbar-link">Home</a>
             <a href="./about.html" class="topbar-link">About Me</a>
             <a href="./projects.html" class="topbar-link">Projects</a>
             <a href="./contact.html" class="topbar-link">Contact</a>
-            <a href="./star.html" class="topbar-link topbar-link--star">
+            <a href="./star.html" class="topbar-link topbar-link--star topbar-link--active">
               <span class="topbar-star-icon">✦</span>
               <span>Leave a Star</span>
             </a>
@@ -31,119 +31,10 @@
         <div class="topbar-underline"></div>
       </header>
 
-      <main class="home-canvas" aria-label="Homepage">
-        <div class="home-grid" aria-hidden="true"></div>
-        <img
-          class="home-noise-image"
-          src="https://www.figma.com/api/mcp/asset/0408a181-4e1b-4c43-937e-113053cdfba4"
-          alt=""
-        />
-
-        <section class="home-hero-absolute" aria-label="Hero">
-          <div class="home-system-online">
-            <span class="home-system-dot" aria-hidden="true"></span>
-            <span class="home-system-text">System Online</span>
-          </div>
-
-          <h1 class="home-creative-developer">
-            <span class="home-creative-developer--white">CREATIVE </span>
-            <span class="home-creative-developer--gradient">DEVELOPER</span>
-          </h1>
-
-          <p class="home-welcome">Hi! Welcome to my portfolio website.</p>
-
-          <a class="home-intro-button" href="#introduction">
-            <span>Introduction</span>
-            <img
-              class="home-intro-arrow"
-              src="https://www.figma.com/api/mcp/asset/fab08e9d-c6b3-4a4d-adcb-a0e025c4f504"
-              alt=""
-            />
-          </a>
-        </section>
-
-        <section
-          id="introduction"
-          class="home-introduction"
-          aria-label="Introduction"
-        >
-          <h2 class="home-introduction-title">Introduction</h2>
-          <div class="home-introduction-underline" aria-hidden="true"></div>
-
-          <div class="home-intro-cards">
-            <article class="home-intro-card home-intro-card--who">
-              <div class="home-intro-card-icon">
-                <div class="home-intro-card-icon-bg"></div>
-                <img
-                  class="home-intro-card-icon-img"
-                  src="https://www.figma.com/api/mcp/asset/fe6d4740-ecee-4268-a22d-8e3f7e4b8f04"
-                  alt=""
-                />
-              </div>
-              <h3 class="home-intro-card-title">Who I am</h3>
-              <div class="home-intro-card-body">
-                A passionate developer &amp; designer with a love for projects
-                that are functional, helpful and eye catching.
-              </div>
-            </article>
-
-            <article class="home-intro-card home-intro-card--what">
-              <div class="home-intro-card-icon">
-                <div class="home-intro-card-icon-bg"></div>
-                <img
-                  class="home-intro-card-icon-img"
-                  src="https://www.figma.com/api/mcp/asset/d8b19fdd-ab90-4a44-b164-0922c96a26a7"
-                  alt=""
-                />
-              </div>
-              <h3 class="home-intro-card-title">What I Do</h3>
-              <div class="home-intro-card-body">
-                <ul class="home-intro-card-list">
-                  <li>Full Stack Web Development</li>
-                  <li>UX Research</li>
-                  <li>Visual/UX Design</li>
-                </ul>
-              </div>
-            </article>
-
-            <article class="home-intro-card home-intro-card--beyond">
-              <div class="home-intro-card-icon">
-                <div class="home-intro-card-icon-bg"></div>
-                <img
-                  class="home-intro-card-icon-img"
-                  src="https://www.figma.com/api/mcp/asset/c4e9236d-8f3e-4b49-b1e4-a7e43bd4bdda"
-                  alt=""
-                />
-              </div>
-              <h3 class="home-intro-card-title">Beyond The Code</h3>
-              <div class="home-intro-card-body">
-                <p class="home-intro-card-body-line">
-                  When I’m not coding, I like to:
-                </p>
-                <ul class="home-intro-card-list">
-                  <li>Design 3D elements</li>
-                  <li>
-                    fulfill my role as a web developer for
-                    <a
-                      class="home-inline-link"
-                      href="https://laurierstempublishingsociety.github.io/"
-                      target="_blank"
-                      rel="noreferrer"
-                      >LSPS</a
-                    >
-                  </li>
-                  <li>Tutoring younger years</li>
-                </ul>
-              </div>
-            </article>
-          </div>
-        </section>
-      </main>
-
-      <section class="star-section" aria-label="Leave a star">
-        <header class="star-header">
-          <p class="star-title">&gt; _ leave a star</p>
-          <p class="star-counter" id="star-counter">
+      <main class="star-page" aria-label="Leave a Star page">
+        <section class="star-page-header">
+          <p class="star-title">&gt; click anywhere to leave your star</p>
+          <p class="star-counter" id="star-page-counter">
             Loading stars...
           </p>
           <div class="star-color-picker" aria-label="Choose your star color">
@@ -179,16 +70,20 @@
               aria-label="Soft purple star"
             ></button>
           </div>
-        </header>
+        </section>
 
-        <div class="star-sky" id="star-sky">
-          <div class="star-sky-inner" id="star-sky-inner"></div>
+        <section class="star-page-sky" aria-label="Shared night sky">
+          <div class="star-page-sky-inner" id="star-page-sky-inner">
+            <div class="star-page-ambient star-page-ambient--layer1"></div>
+            <div class="star-page-ambient star-page-ambient--layer2"></div>
+          </div>
           <div class="star-scanlines" aria-hidden="true"></div>
-        </div>
-        <p class="star-note" id="star-note">
-          One star per visitor. Click anywhere in the sky to leave yours.
+        </section>
+
+        <p class="star-note" id="star-page-note">
+          One star per visitor. Your star will stay here for others to see.
         </p>
-      </section>
+      </main>
 
       <footer class="site-footer" aria-label="Footer">
         <div class="site-footer-inner">
@@ -206,34 +101,12 @@
     </div>
 
     <script>
-      document.getElementById("year").textContent = new Date().getFullYear();
-
-      const introBtn = document.querySelector(".home-intro-button");
-      introBtn?.addEventListener("click", (e) => {
-        e.preventDefault();
-        const target = document.getElementById("introduction");
-        if (!target) return;
-
-        const prefersReduced = window.matchMedia?.(
-          "(prefers-reduced-motion: reduce)"
-        )?.matches;
-
-        target.scrollIntoView({
-          behavior: prefersReduced ? "auto" : "smooth",
-          block: "start"
-        });
-      });
+      document.getElementById("year")?.textContent = new Date().getFullYear();
     </script>
 
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
-      import {
-        getFirestore,
-        collection,
-        addDoc,
-        getDocs,
-        onSnapshot
-      } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+      import { getFirestore } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
 
       const firebaseConfig = {
         apiKey: "AIzaSyD52inhCqXshSxhPwL4fXEIL8ARmMDhS8o",
@@ -246,10 +119,7 @@
 
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
-
-      // Make db globally accessible to the React app
       window.db = db;
-      window.firebaseCollections = { collection, addDoc, getDocs, onSnapshot };
     </script>
 
     <script type="module">
@@ -265,10 +135,9 @@
       if (!db) {
         console.error("Firebase db is not initialized on window.db");
       } else {
-        const sky = document.getElementById("star-sky");
-        const skyInner = document.getElementById("star-sky-inner");
-        const counterEl = document.getElementById("star-counter");
-        const noteEl = document.getElementById("star-note");
+        const skyInner = document.getElementById("star-page-sky-inner");
+        const counterEl = document.getElementById("star-page-counter");
+        const noteEl = document.getElementById("star-page-note");
         const colorSwatches = Array.from(
           document.querySelectorAll(".star-color-swatch")
         );
@@ -304,10 +173,9 @@
           skyInner.appendChild(dot);
         }
 
-        // Initial one-time fetch using getDocs (for first paint)
+        // Initial ambient load
         getDocs(starsCol)
           .then((snapshot) => {
-            skyInner.innerHTML = "";
             snapshot.forEach((doc) => {
               const data = doc.data();
               if (
@@ -323,9 +191,11 @@
             console.error("Error fetching initial stars:", err);
           });
 
-        // Live subscription to stars collection
         onSnapshot(starsCol, (snapshot) => {
-          skyInner.innerHTML = "";
+          // do not clear ambient background; just rebuild stars
+          const existingStars = skyInner.querySelectorAll(".star-dot");
+          existingStars.forEach((n) => n.remove());
+
           const stars = [];
           let hasMyStar = false;
 
@@ -347,31 +217,22 @@
           const count = stars.length;
           counterEl.textContent =
             count === 1
-              ? "> 1 star left by visitors"
-              : `> ${count} stars left by visitors`;
+              ? "> ✦ 1 star left by visitors"
+              : `> ✦ ${count} stars left by visitors`;
 
-          // If we had a stored star id but it no longer exists in Firestore,
-          // clear the local lock so the visitor can place a new one.
           if (storedDocId && !hasMyStar) {
             localStorage.removeItem(STAR_KEY);
             localStorage.removeItem(STAR_DOC_KEY);
             noteEl.textContent =
-              "Your previous star was removed. You can leave a new one.";
-            sky.classList.remove("star-sky--disabled");
+              "> your previous star was removed, you can leave a new one.";
           }
         });
 
-        // For old visitors before STAR_DOC_KEY existed:
-        // if they only have STAR_KEY set, we keep the one‑per‑visit behaviour
-        // until an admin deletes their star, at which point STAR_KEY/STAR_DOC_KEY
-        // will be cleared by the onSnapshot logic above.
         if (legacyPlaced) {
-          noteEl.textContent =
-            "You already left a star in the sky. Thank you.";
-          sky.classList.add("star-sky--disabled");
+          noteEl.textContent = "> you've already left your mark ✦";
         }
 
-        sky.addEventListener("click", async (event) => {
+        skyInner.addEventListener("click", async (event) => {
           if (localStorage.getItem(STAR_KEY) === "1") {
             return;
           }
@@ -391,13 +252,11 @@
             });
             localStorage.setItem(STAR_KEY, "1");
             localStorage.setItem(STAR_DOC_KEY, docRef.id);
-            noteEl.textContent =
-              "You left a star in the sky. Thank you.";
-            sky.classList.add("star-sky--disabled");
+            noteEl.textContent = "> you've already left your mark ✦";
           } catch (err) {
             console.error("Error saving star:", err);
             noteEl.textContent =
-              "Could not save your star right now. Please try again later.";
+              "> could not save your star right now, please try again later.";
           }
         });
       }

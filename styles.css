@@ -144,6 +144,24 @@ body {
   position: relative;
 }
 
+.topbar-link--star {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(110, 207, 255, 0.6);
+  background: radial-gradient(circle at 0 0, rgba(110, 207, 255, 0.25), transparent 55%),
+    radial-gradient(circle at 100% 100%, rgba(189, 147, 249, 0.2), transparent 55%);
+  box-shadow: 0 0 16px rgba(110, 207, 255, 0.35);
+  font-size: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  animation: star-nav-pulse 2.6s ease-in-out infinite;
+}
+
+.topbar-link--star .topbar-star-icon {
+  font-size: 18px;
+}
+
 .topbar-link--active {
   color: var(--accent-blue);
   letter-spacing: 1.2px;
@@ -165,6 +183,15 @@ body {
   height: 3px;
   bottom: -16px;
   background: var(--accent-blue);
+}
+
+.topbar-link--star.topbar-link--active {
+  border-color: #ffffff;
+  box-shadow: 0 0 22px rgba(255, 255, 255, 0.4);
+}
+
+.topbar-link--star.topbar-link--active::after {
+  display: none;
 }
 
 .topbar-underline {
@@ -938,6 +965,11 @@ body {
     gap: 12px;
   }
 
+  .topbar-nav {
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
   .contact-grid {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -1397,6 +1429,66 @@ body {
   50% {
     transform: translate(-50%, -50%) scale(1.45);
     opacity: 1;
+  }
+}
+
+/* Full-page Leave a Star layout */
+
+.star-page {
+  max-width: 1120px;
+  margin: 80px auto 96px;
+  padding: 0 24px;
+  font-family: "Space Mono", monospace;
+}
+
+.star-page-header {
+  margin-bottom: 18px;
+}
+
+.star-page-sky {
+  position: relative;
+  border-radius: 22px;
+  border: 1px solid rgba(219, 228, 245, 0.28);
+  background: radial-gradient(circle at 10% 0%, rgba(110, 207, 255, 0.22), transparent 60%),
+    radial-gradient(circle at 90% 100%, rgba(189, 147, 249, 0.2), transparent 65%),
+    #02040a;
+  overflow: hidden;
+  cursor: crosshair;
+  min-height: 420px;
+  box-shadow: 0 32px 70px rgba(0, 0, 0, 0.6);
+}
+
+.star-page-sky-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.star-page-ambient {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.9) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.18;
+  animation: star-ambient-drift 60s linear infinite;
+}
+
+.star-page-ambient--layer2 {
+  background-size: 80px 80px;
+  opacity: 0.1;
+  animation-duration: 90s;
+}
+
+.star-page .star-dot {
+  animation-duration: 2.6s;
+}
+
+@keyframes star-ambient-drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-80px, -40px, 0);
   }
 }
 
