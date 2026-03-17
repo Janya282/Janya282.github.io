@@ -34,45 +34,18 @@
       <main class="star-page" aria-label="Leave a Star page">
         <section class="star-page-header">
           <p class="star-title">&gt; click anywhere to leave your star</p>
-          <p class="star-counter" id="star-page-counter">
-            Loading stars...
-          </p>
+          <p class="star-counter" id="star-page-counter">Loading stars...</p>
           <div class="star-color-picker" aria-label="Choose your star color">
             <span>Pick a color:</span>
-            <button
-              class="star-color-swatch star-color-swatch--white star-color-swatch--active"
-              type="button"
-              data-color="#ffffff"
-              aria-label="White star"
-            ></button>
-            <button
-              class="star-color-swatch star-color-swatch--yellow"
-              type="button"
-              data-color="#ffe9a9"
-              aria-label="Soft yellow star"
-            ></button>
-            <button
-              class="star-color-swatch star-color-swatch--blue"
-              type="button"
-              data-color="#9fdcff"
-              aria-label="Light blue star"
-            ></button>
-            <button
-              class="star-color-swatch star-color-swatch--pink"
-              type="button"
-              data-color="#ffb3df"
-              aria-label="Pink star"
-            ></button>
-            <button
-              class="star-color-swatch star-color-swatch--purple"
-              type="button"
-              data-color="#d3b5ff"
-              aria-label="Soft purple star"
-            ></button>
+            <button class="star-color-swatch star-color-swatch--white star-color-swatch--active" type="button" data-color="#ffffff" aria-label="White star"></button>
+            <button class="star-color-swatch star-color-swatch--yellow" type="button" data-color="#ffe9a9" aria-label="Soft yellow star"></button>
+            <button class="star-color-swatch star-color-swatch--blue" type="button" data-color="#9fdcff" aria-label="Light blue star"></button>
+            <button class="star-color-swatch star-color-swatch--pink" type="button" data-color="#ffb3df" aria-label="Pink star"></button>
+            <button class="star-color-swatch star-color-swatch--purple" type="button" data-color="#d3b5ff" aria-label="Soft purple star"></button>
           </div>
         </section>
 
-        <section class="star-page-sky" aria-label="Shared night sky">
+        <section class="star-page-sky" id="star-page-sky" aria-label="Shared night sky">
           <div class="star-page-sky-inner" id="star-page-sky-inner">
             <div class="star-page-ambient star-page-ambient--layer1"></div>
             <div class="star-page-ambient star-page-ambient--layer2"></div>
@@ -92,18 +65,11 @@
             ><span class="site-footer-cursor" aria-hidden="true"></span>
           </p>
           <p class="site-footer-text site-footer-resume">
-            <a href="./janya-walia-resume.pdf" target="_blank" rel="noopener noreferrer"
-              >View resume</a
-            >
+            <a href="./janya-walia-resume.pdf" target="_blank" rel="noopener noreferrer">View resume</a>
           </p>
         </div>
       </footer>
     </div>
-
-    <script>
-      const yearEl = document.getElementById("year");
-      if (yearEl) yearEl.textContent = new Date().getFullYear();
-    </script>
 
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
@@ -111,7 +77,6 @@
         getFirestore,
         collection,
         addDoc,
-        getDocs,
         onSnapshot,
         serverTimestamp
       } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
@@ -128,106 +93,73 @@
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
 
-        const skyInner = document.getElementById("star-page-sky-inner");
-        const counterEl = document.getElementById("star-page-counter");
-        const noteEl = document.getElementById("star-page-note");
-        const colorSwatches = Array.from(
-          document.querySelectorAll(".star-color-swatch")
-        );
+      const skyOuter = document.getElementById("star-page-sky");
+      const skyInner = document.getElementById("star-page-sky-inner");
+      const counterEl = document.getElementById("star-page-counter");
+      const noteEl = document.getElementById("star-page-note");
+      const colorSwatches = Array.from(document.querySelectorAll(".star-color-swatch"));
 
-        let selectedColor =
-          colorSwatches.find((el) =>
-            el.classList.contains("star-color-swatch--active")
-          )?.dataset.color || "#ffffff";
+      let selectedColor = "#ffffff";
 
-        colorSwatches.forEach((swatch) => {
-          swatch.addEventListener("click", () => {
-            colorSwatches.forEach((s) =>
-              s.classList.remove("star-color-swatch--active")
-            );
-            swatch.classList.add("star-color-swatch--active");
-            selectedColor = swatch.dataset.color || "#ffffff";
-          });
+      colorSwatches.forEach((swatch) => {
+        swatch.addEventListener("click", (e) => {
+          e.stopPropagation();
+          colorSwatches.forEach((s) => s.classList.remove("star-color-swatch--active"));
+          swatch.classList.add("star-color-swatch--active");
+          selectedColor = swatch.dataset.color || "#ffffff";
         });
+      });
 
-        const starsCol = collection(db, "stars");
+      const starsCol = collection(db, "stars");
 
-        function renderStar(star) {
-          const dot = document.createElement("div");
-          dot.className = "star-dot";
-          dot.style.left = `${star.x * 100}%`;
-          dot.style.top = `${star.y * 100}%`;
-          dot.style.backgroundColor = star.color;
-          skyInner.appendChild(dot);
-        }
+      function renderStar(star) {
+        const dot = document.createElement("div");
+        dot.className = "star-dot";
+        dot.style.left = `${star.x * 100}%`;
+        dot.style.top = `${star.y * 100}%`;
+        dot.style.backgroundColor = star.color;
+        skyInner.appendChild(dot);
+      }
 
-        // Initial ambient load
-        getDocs(starsCol)
-          .then((snapshot) => {
-            snapshot.forEach((doc) => {
-              const data = doc.data();
-              if (
-                typeof data.x === "number" &&
-                typeof data.y === "number" &&
-                typeof data.color === "string"
-              ) {
-                renderStar(data);
-              }
-            });
-          })
-          .catch((err) => {
-            console.error("Error fetching initial stars:", err);
-          });
-
-        onSnapshot(starsCol, (snapshot) => {
-          // do not clear ambient background; just rebuild stars
-          const existingStars = skyInner.querySelectorAll(".star-dot");
-          existingStars.forEach((n) => n.remove());
-
-          const stars = [];
-
-          snapshot.forEach((doc) => {
-            const data = doc.data();
-            if (
-              typeof data.x === "number" &&
-              typeof data.y === "number" &&
-              typeof data.color === "string"
-            ) {
-              stars.push({ id: doc.id, ...data });
-              renderStar(data);
-            }
-          });
-
-          const count = stars.length;
-          counterEl.textContent =
-            count === 1
-              ? "> ✦ 1 star left by visitors"
-              : `> ✦ ${count} stars left by visitors`;
-
-        });
-
-        skyInner.addEventListener("click", async (event) => {
-          const rect = skyInner.getBoundingClientRect();
-          const x = (event.clientX - rect.left) / rect.width;
-          const y = (event.clientY - rect.top) / rect.height;
-
-          if (x < 0 || x > 1 || y < 0 || y > 1) return;
-
-          try {
-            await addDoc(starsCol, {
-              x,
-              y,
-              color: selectedColor,
-              timestamp: serverTimestamp()
-            });
-            noteEl.textContent =
-              "> thank you for leaving a star ✦ (feel free to add more!)";
-          } catch (err) {
-            console.error("Error saving star:", err);
-            noteEl.textContent =
-              "> could not save your star right now, please try again later.";
+      onSnapshot(starsCol, (snapshot) => {
+        skyInner.querySelectorAll(".star-dot").forEach((n) => n.remove());
+        const stars = [];
+        snapshot.forEach((doc) => {
+          const data = doc.data();
+          if (typeof data.x === "number" && typeof data.y === "number" && typeof data.color === "string") {
+            stars.push(data);
+            renderStar(data);
           }
         });
+        const count = stars.length;
+        counterEl.textContent = count === 1
+          ? "> ✦ 1 star left by visitors"
+          : `> ✦ ${count} stars left by visitors`;
+      }, (err) => {
+        console.error("onSnapshot error:", err);
+        counterEl.textContent = "> ✦ could not load stars";
+      });
+
+      skyOuter.addEventListener("click", async (event) => {
+        if (event.target.closest(".star-color-swatch")) return;
+
+        const rect = skyInner.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width;
+        const y = (event.clientY - rect.top) / rect.height;
+
+        try {
+          await addDoc(starsCol, {
+            x,
+            y,
+            color: selectedColor,
+            timestamp: serverTimestamp()
+          });
+          noteEl.textContent = "> thank you for leaving a star ✦";
+        } catch (err) {
+          console.error("Error saving star:", err);
+          noteEl.textContent = "> could not save your star, please try again.";
+        }
+      });
     </script>
   </body>
 </html>
