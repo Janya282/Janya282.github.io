@@ -93,6 +93,7 @@
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
 
+      const skyOuter = document.getElementById("star-page-sky");
       const skyInner = document.getElementById("star-page-sky-inner");
       const counterEl = document.getElementById("star-page-counter");
       const noteEl = document.getElementById("star-page-note");
@@ -139,9 +140,15 @@
         counterEl.textContent = "> ✦ could not load stars";
       });
 
-      skyInner.addEventListener("click", async (event) => {
-        const x = event.offsetX / skyInner.clientWidth;
-        const y = event.offsetY / skyInner.clientHeight;
+      // Click listener on OUTER sky, coordinates calculated against INNER sky
+      skyOuter.addEventListener("click", async (event) => {
+        if (event.target.closest(".star-color-swatch")) return;
+
+        const rect = skyInner.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width;
+        const y = (event.clientY - rect.top) / rect.height;
+
+        if (x < 0 || x > 1 || y < 0 || y > 1) return;
 
         try {
           await addDoc(starsCol, {
