@@ -143,7 +143,7 @@
       skyOuter.addEventListener("click", async (event) => {
         if (event.target.closest(".star-color-swatch")) return;
 
-        const rect = skyInner.getBoundingClientRect();
+        const rect = skyOuter.getBoundingClientRect();
         const x = (event.clientX - rect.left) / rect.width;
         const y = (event.clientY - rect.top) / rect.height;
 
