@@ -61,6 +61,19 @@ body {
   letter-spacing: 0.02em;
 }
 
+.site-footer-resume {
+  font-size: 13px;
+}
+
+.site-footer-resume a {
+  color: var(--accent-blue);
+  text-decoration: none;
+}
+
+.site-footer-resume a:hover {
+  text-decoration: underline;
+}
+
 .site-footer-prompt {
   font-family: "VT323", monospace;
   font-size: 16px;
