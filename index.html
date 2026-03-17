@@ -285,7 +285,9 @@
         });
 
         const STAR_KEY = "janya_portfolio_star_placed";
-        const starAlreadyPlaced = localStorage.getItem(STAR_KEY) === "1";
+        const STAR_DOC_KEY = "janya_portfolio_star_doc_id";
+        const legacyPlaced = localStorage.getItem(STAR_KEY) === "1";
+        const storedDocId = localStorage.getItem(STAR_DOC_KEY);
 
         const starsCol = collection(db, "stars");
 
@@ -321,6 +323,8 @@
         onSnapshot(starsCol, (snapshot) => {
           skyInner.innerHTML = "";
           const stars = [];
+          let hasMyStar = false;
+
           snapshot.forEach((doc) => {
             const data = doc.data();
             if (
@@ -328,18 +332,36 @@
               typeof data.y === "number" &&
               typeof data.color === "string"
             ) {
-              stars.push(data);
+              stars.push({ id: doc.id, ...data });
               renderStar(data);
+              if (storedDocId && doc.id === storedDocId) {
+                hasMyStar = true;
+              }
             }
           });
+
           const count = stars.length;
           counterEl.textContent =
             count === 1
               ? "> 1 star left by visitors"
               : `> ${count} stars left by visitors`;
+
+          // If we had a stored star id but it no longer exists in Firestore,
+          // clear the local lock so the visitor can place a new one.
+          if (storedDocId && !hasMyStar) {
+            localStorage.removeItem(STAR_KEY);
+            localStorage.removeItem(STAR_DOC_KEY);
+            noteEl.textContent =
+              "Your previous star was removed. You can leave a new one.";
+            sky.classList.remove("star-sky--disabled");
+          }
         });
 
-        if (starAlreadyPlaced) {
+        // For old visitors before STAR_DOC_KEY existed:
+        // if they only have STAR_KEY set, we keep the one‑per‑visit behaviour
+        // until an admin deletes their star, at which point STAR_KEY/STAR_DOC_KEY
+        // will be cleared by the onSnapshot logic above.
+        if (legacyPlaced) {
           noteEl.textContent =
             "You already left a star in the sky. Thank you.";
           sky.classList.add("star-sky--disabled");
@@ -357,13 +379,14 @@
           if (x < 0 || x > 1 || y < 0 || y > 1) return;
 
           try {
-            await addDoc(starsCol, {
+            const docRef = await addDoc(starsCol, {
               x,
               y,
               color: selectedColor,
               timestamp: serverTimestamp()
             });
             localStorage.setItem(STAR_KEY, "1");
+            localStorage.setItem(STAR_DOC_KEY, docRef.id);
             noteEl.textContent =
               "You left a star in the sky. Thank you.";
             sky.classList.add("star-sky--disabled");
