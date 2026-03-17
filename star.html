@@ -81,7 +81,7 @@
         </section>
 
         <p class="star-note" id="star-page-note">
-          One star per visitor. Your star will stay here for others to see.
+          Please leave one star — your star will stay here for others to see!
         </p>
       </main>
 
@@ -157,11 +157,6 @@
           });
         });
 
-        const STAR_KEY = "janya_portfolio_star_placed";
-        const STAR_DOC_KEY = "janya_portfolio_star_doc_id";
-        const legacyPlaced = localStorage.getItem(STAR_KEY) === "1";
-        const storedDocId = localStorage.getItem(STAR_DOC_KEY);
-
         const starsCol = collection(db, "stars");
 
         function renderStar(star) {
@@ -197,7 +192,6 @@
           existingStars.forEach((n) => n.remove());
 
           const stars = [];
-          let hasMyStar = false;
 
           snapshot.forEach((doc) => {
             const data = doc.data();
@@ -208,9 +202,6 @@
             ) {
               stars.push({ id: doc.id, ...data });
               renderStar(data);
-              if (storedDocId && doc.id === storedDocId) {
-                hasMyStar = true;
-              }
             }
           });
 
@@ -220,23 +211,9 @@
               ? "> ✦ 1 star left by visitors"
               : `> ✦ ${count} stars left by visitors`;
 
-          if (storedDocId && !hasMyStar) {
-            localStorage.removeItem(STAR_KEY);
-            localStorage.removeItem(STAR_DOC_KEY);
-            noteEl.textContent =
-              "> your previous star was removed, you can leave a new one.";
-          }
         });
 
-        if (legacyPlaced) {
-          noteEl.textContent = "> you've already left your mark ✦";
-        }
-
         skyInner.addEventListener("click", async (event) => {
-          if (localStorage.getItem(STAR_KEY) === "1") {
-            return;
-          }
-
           const rect = skyInner.getBoundingClientRect();
           const x = (event.clientX - rect.left) / rect.width;
           const y = (event.clientY - rect.top) / rect.height;
@@ -244,15 +221,14 @@
           if (x < 0 || x > 1 || y < 0 || y > 1) return;
 
           try {
-            const docRef = await addDoc(starsCol, {
+            await addDoc(starsCol, {
               x,
               y,
               color: selectedColor,
               timestamp: serverTimestamp()
             });
-            localStorage.setItem(STAR_KEY, "1");
-            localStorage.setItem(STAR_DOC_KEY, docRef.id);
-            noteEl.textContent = "> you've already left your mark ✦";
+            noteEl.textContent =
+              "> thank you for leaving a star ✦ (feel free to add more!)";
           } catch (err) {
             console.error("Error saving star:", err);
             noteEl.textContent =
