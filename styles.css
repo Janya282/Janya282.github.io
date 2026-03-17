@@ -989,7 +989,7 @@ body {
 
 .home-system-online {
   position: absolute;
-  left: 582px;
+  left: 50%;
   top: 335px;
   width: 275px;
   height: 47px;
@@ -1000,6 +1000,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 14px;
+  transform: translateX(-50%);
 }
 
 .home-system-dot {
@@ -1017,9 +1018,9 @@ body {
 
 .home-creative-developer {
   position: absolute;
-  left: 204px;
+  left: 50%;
   top: 406px;
-  width: 1046px;
+  width: auto;
   height: 120px;
   margin: 0;
   font-family: "VT323", monospace;
@@ -1027,6 +1028,8 @@ body {
   line-height: 120px;
   letter-spacing: 6.4px;
   text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  transform: translateX(-50%);
+  white-space: nowrap;
 }
 
 .home-creative-developer--white {
@@ -1042,7 +1045,7 @@ body {
 
 .home-welcome {
   position: absolute;
-  left: 411px;
+  left: 50%;
   top: 560px;
   width: 617px;
   margin: 0;
@@ -1050,12 +1053,13 @@ body {
   font-size: 24px;
   line-height: 1.35;
   color: var(--text-soft);
-  white-space: pre-wrap;
+  text-align: center;
+  transform: translateX(-50%);
 }
 
 .home-intro-button {
   position: absolute;
-  left: 611px;
+  left: 50%;
   top: 681px;
   width: 287px;
   height: 65px;
@@ -1075,6 +1079,7 @@ body {
     background-color 160ms ease,
     transform 160ms ease;
   will-change: transform;
+  transform: translateX(-50%);
 }
 
 .home-intro-arrow {
