@@ -1114,7 +1114,7 @@ body {
 
 /* "Variant2" feel: content drops lower on press */
 .home-intro-button:active {
-  transform: translateY(4px);
+  transform: translate(-50%, 4px);
   border-color: #dbe4f5;
 }
 
