@@ -29,6 +29,7 @@ body {
     "SF Pro Text", monospace;
   background-color: var(--bg-page);
   color: var(--text-main);
+  overflow-x: hidden;
 }
 
 .page {
@@ -1238,6 +1239,14 @@ body {
   .home-intro-cards {
     grid-template-columns: 334px;
     gap: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .home-canvas {
+    transform: scale(0.7);
+    transform-origin: top center;
+    min-height: 1100px;
   }
 }
 
