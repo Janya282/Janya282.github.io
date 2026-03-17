@@ -228,8 +228,7 @@
         collection,
         addDoc,
         getDocs,
-        onSnapshot,
-        serverTimestamp
+        onSnapshot
       } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
 
       const firebaseConfig = {
@@ -244,33 +243,51 @@
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
 
-      const sky = document.getElementById("star-sky");
-      const skyInner = document.getElementById("star-sky-inner");
-      const counterEl = document.getElementById("star-counter");
-      const noteEl = document.getElementById("star-note");
-      const colorSwatches = Array.from(
-        document.querySelectorAll(".star-color-swatch")
-      );
+      // Make db globally accessible to the React app
+      window.db = db;
+      window.firebaseCollections = { collection, addDoc, getDocs, onSnapshot };
+    </script>
 
-      let selectedColor =
-        colorSwatches.find((el) =>
-          el.classList.contains("star-color-swatch--active")
-        )?.dataset.color || "#ffffff";
+    <script type="module">
+      import {
+        collection,
+        addDoc,
+        getDocs,
+        onSnapshot,
+        serverTimestamp
+      } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
 
-      colorSwatches.forEach((swatch) => {
-        swatch.addEventListener("click", () => {
-          colorSwatches.forEach((s) =>
-            s.classList.remove("star-color-swatch--active")
-          );
-          swatch.classList.add("star-color-swatch--active");
-          selectedColor = swatch.dataset.color || "#ffffff";
+      const db = window.db;
+      if (!db) {
+        console.error("Firebase db is not initialized on window.db");
+      } else {
+        const sky = document.getElementById("star-sky");
+        const skyInner = document.getElementById("star-sky-inner");
+        const counterEl = document.getElementById("star-counter");
+        const noteEl = document.getElementById("star-note");
+        const colorSwatches = Array.from(
+          document.querySelectorAll(".star-color-swatch")
+        );
+
+        let selectedColor =
+          colorSwatches.find((el) =>
+            el.classList.contains("star-color-swatch--active")
+          )?.dataset.color || "#ffffff";
+
+        colorSwatches.forEach((swatch) => {
+          swatch.addEventListener("click", () => {
+            colorSwatches.forEach((s) =>
+              s.classList.remove("star-color-swatch--active")
+            );
+            swatch.classList.add("star-color-swatch--active");
+            selectedColor = swatch.dataset.color || "#ffffff";
+          });
         });
-      });
 
-      const STAR_KEY = "janya_portfolio_star_placed";
-      const starAlreadyPlaced = localStorage.getItem(STAR_KEY) === "1";
+        const STAR_KEY = "janya_portfolio_star_placed";
+        const starAlreadyPlaced = localStorage.getItem(STAR_KEY) === "1";
 
-      const starsCol = collection(db, "stars");
+        const starsCol = collection(db, "stars");
 
         function renderStar(star) {
           const dot = document.createElement("div");
@@ -281,10 +298,29 @@
           skyInner.appendChild(dot);
         }
 
-      // Initial one-time fetch using getDocs (for first paint)
-      getDocs(starsCol)
-        .then((snapshot) => {
+        // Initial one-time fetch using getDocs (for first paint)
+        getDocs(starsCol)
+          .then((snapshot) => {
+            skyInner.innerHTML = "";
+            snapshot.forEach((doc) => {
+              const data = doc.data();
+              if (
+                typeof data.x === "number" &&
+                typeof data.y === "number" &&
+                typeof data.color === "string"
+              ) {
+                renderStar(data);
+              }
+            });
+          })
+          .catch((err) => {
+            console.error("Error fetching initial stars:", err);
+          });
+
+        // Live subscription to stars collection
+        onSnapshot(starsCol, (snapshot) => {
           skyInner.innerHTML = "";
+          const stars = [];
           snapshot.forEach((doc) => {
             const data = doc.data();
             if (
@@ -292,68 +328,52 @@
               typeof data.y === "number" &&
               typeof data.color === "string"
             ) {
+              stars.push(data);
               renderStar(data);
             }
           });
-        })
-        .catch((err) => {
-          console.error("Error fetching initial stars:", err);
+          const count = stars.length;
+          counterEl.textContent =
+            count === 1
+              ? "> 1 star left by visitors"
+              : `> ${count} stars left by visitors`;
         });
 
-      // Live subscription to stars collection
-      onSnapshot(starsCol, (snapshot) => {
-        skyInner.innerHTML = "";
-        const stars = [];
-        snapshot.forEach((doc) => {
-          const data = doc.data();
-          if (
-            typeof data.x === "number" &&
-            typeof data.y === "number" &&
-            typeof data.color === "string"
-          ) {
-            stars.push(data);
-            renderStar(data);
+        if (starAlreadyPlaced) {
+          noteEl.textContent =
+            "You already left a star in the sky. Thank you.";
+          sky.classList.add("star-sky--disabled");
+        }
+
+        sky.addEventListener("click", async (event) => {
+          if (localStorage.getItem(STAR_KEY) === "1") {
+            return;
+          }
+
+          const rect = skyInner.getBoundingClientRect();
+          const x = (event.clientX - rect.left) / rect.width;
+          const y = (event.clientY - rect.top) / rect.height;
+
+          if (x < 0 || x > 1 || y < 0 || y > 1) return;
+
+          try {
+            await addDoc(starsCol, {
+              x,
+              y,
+              color: selectedColor,
+              timestamp: serverTimestamp()
+            });
+            localStorage.setItem(STAR_KEY, "1");
+            noteEl.textContent =
+              "You left a star in the sky. Thank you.";
+            sky.classList.add("star-sky--disabled");
+          } catch (err) {
+            console.error("Error saving star:", err);
+            noteEl.textContent =
+              "Could not save your star right now. Please try again later.";
           }
         });
-        const count = stars.length;
-        counterEl.textContent =
-          count === 1
-            ? "> 1 star left by visitors"
-            : `> ${count} stars left by visitors`;
-      });
-
-      if (starAlreadyPlaced) {
-        noteEl.textContent = "You already left a star in the sky. Thank you.";
-        sky.classList.add("star-sky--disabled");
       }
-
-      sky.addEventListener("click", async (event) => {
-        if (localStorage.getItem(STAR_KEY) === "1") {
-          return;
-        }
-
-        const rect = skyInner.getBoundingClientRect();
-        const x = (event.clientX - rect.left) / rect.width;
-        const y = (event.clientY - rect.top) / rect.height;
-
-        if (x < 0 || x > 1 || y < 0 || y > 1) return;
-
-        try {
-          await addDoc(starsCol, {
-            x,
-            y,
-            color: selectedColor,
-            timestamp: serverTimestamp()
-          });
-          localStorage.setItem(STAR_KEY, "1");
-          noteEl.textContent = "You left a star in the sky. Thank you.";
-          sky.classList.add("star-sky--disabled");
-        } catch (err) {
-          console.error("Error saving star:", err);
-          noteEl.textContent =
-            "Could not save your star right now. Please try again later.";
-        }
-      });
     </script>
   </body>
 </html>
