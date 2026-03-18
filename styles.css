@@ -901,6 +901,23 @@ body {
   opacity: 0.9;
 }
 
+.project-image--ux-zoom {
+  object-position: 50% 50%;
+  /* Zoom slightly via scale; contained by .project-media (overflow hidden) */
+  transform: scale(1.28);
+  transform-origin: center;
+  opacity: 0.85;
+}
+
+.project-card:hover .project-image--ux-zoom {
+  transform: scale(1.18);
+}
+
+.project-detail-image--ux-right {
+  /* Show mostly the right side of the frame */
+  object-position: 80% center;
+}
+
 .project-image--ux {
   background: radial-gradient(circle at 20% 20%, rgba(189, 147, 249, 0.26), transparent 50%),
     radial-gradient(circle at 70% 60%, rgba(110, 207, 255, 0.18), transparent 55%),
