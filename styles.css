@@ -669,6 +669,12 @@ body {
   object-fit: cover;
 }
 
+.project-detail-image--lsps {
+  /* LSPS image crops too aggressively with default cover; scale down slightly. */
+  transform: scale(0.88);
+  transform-origin: center;
+}
+
 .project-detail-image--cars {
   /* Shift crop to show more of the left side */
   object-position: 10% center;
