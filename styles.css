@@ -669,6 +669,11 @@ body {
   object-fit: cover;
 }
 
+.project-detail-image--cars {
+  /* Shift crop to show more of the left side */
+  object-position: 10% center;
+}
+
 .project-detail-image--ux {
   width: 100%;
   height: 100%;
