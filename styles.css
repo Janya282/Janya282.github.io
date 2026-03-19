@@ -924,6 +924,24 @@ body {
   object-position: 80% center;
 }
 
+.project-detail-image--space2 {
+  /* Zoom in a bit for the Space2 framing */
+  transform: scale(1.08);
+  transform-origin: center;
+}
+
+.project-image--space-zoom-out {
+  /* Zoom out a lot on the small card thumbnail */
+  transform: scale(0.7);
+  transform-origin: center;
+  opacity: 0.75;
+}
+
+.project-card:hover .project-image--space-zoom-out {
+  transform: scale(0.78);
+  opacity: 0.9;
+}
+
 .project-image--ux {
   background: radial-gradient(circle at 20% 20%, rgba(189, 147, 249, 0.26), transparent 50%),
     radial-gradient(circle at 70% 60%, rgba(110, 207, 255, 0.18), transparent 55%),
