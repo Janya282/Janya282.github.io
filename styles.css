@@ -932,13 +932,14 @@ body {
 
 .project-image--space-zoom-out {
   /* Zoom out a lot on the small card thumbnail */
-  transform: scale(0.7);
+  object-position: center;
+  transform: scale(1.02);
   transform-origin: center;
-  opacity: 0.75;
+  opacity: 0.84;
 }
 
 .project-card:hover .project-image--space-zoom-out {
-  transform: scale(0.78);
+  transform: scale(1.08);
   opacity: 0.9;
 }
 
