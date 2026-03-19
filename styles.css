@@ -318,13 +318,17 @@ body {
 
 .about-page {
   max-width: 1120px;
-  margin: 56px auto 96px;
+  margin: 72px auto 96px;
   padding: 0 24px;
+}
+
+.about-top {
+  margin-top: 32px;
 }
 
 .about-top-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: 1fr;
   gap: 24px;
   align-items: start;
 }
@@ -397,15 +401,15 @@ body {
 
 .about-terminal-paragraph {
   margin: 0 0 14px;
-  font-size: 14px;
-  line-height: 1.65;
+  font-size: 16px;
+  line-height: 1.7;
   color: #dbe4f5;
 }
 
 .about-terminal-status {
   margin: 8px 0 0;
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 15px;
+  line-height: 1.7;
   color: rgba(32, 255, 106, 0.7);
 }
 
@@ -459,7 +463,7 @@ body {
 .about-logs-title {
   margin: 0 0 18px;
   font-family: "Space Mono", monospace;
-  font-size: 14px;
+  font-size: 15px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #dbe4f5;
@@ -533,14 +537,14 @@ body {
 .about-timeline-heading {
   margin: 0 0 4px;
   font-family: "Space Mono", monospace;
-  font-size: 14px;
+  font-size: 15px;
   color: #dbe4f5;
 }
 
 .about-timeline-body {
   margin: 0;
-  font-size: 13px;
-  line-height: 1.6;
+  font-size: 14px;
+  line-height: 1.7;
   color: var(--text-muted);
 }
 
