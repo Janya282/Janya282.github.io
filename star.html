@@ -74,9 +74,15 @@
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
       import {
+        getAuth,
+        onAuthStateChanged,
+        signInAnonymously
+      } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+      import {
         getFirestore,
         collection,
-        addDoc,
+        doc,
+        setDoc,
         onSnapshot,
         serverTimestamp
       } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
@@ -92,6 +98,7 @@
 
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
+      const auth = getAuth(app);
 
       const skyOuter = document.getElementById("star-page-sky");
       const skyInner = document.getElementById("star-page-sky-inner");
@@ -110,7 +117,9 @@
         });
       });
 
-      const starsCol = collection(db, "stars");
+      // One star per person: one document per auth uid.
+      // Collection: starsByUser, doc id: uid
+      const starsCol = collection(db, "starsByUser");
 
       function renderStar(star) {
         const dot = document.createElement("div");
@@ -123,15 +132,13 @@
 
       onSnapshot(starsCol, (snapshot) => {
         skyInner.querySelectorAll(".star-dot").forEach((n) => n.remove());
-        const stars = [];
         snapshot.forEach((doc) => {
           const data = doc.data();
           if (typeof data.x === "number" && typeof data.y === "number" && typeof data.color === "string") {
-            stars.push(data);
             renderStar(data);
           }
         });
-        const count = stars.length;
+        const count = snapshot.size;
         counterEl.textContent = count === 1
           ? "> ✦ 1 star left by visitors"
           : `> ✦ ${count} stars left by visitors`;
@@ -140,9 +147,31 @@
         counterEl.textContent = "> ✦ could not load stars";
       });
 
+      // Auth bootstrap
+      let uid = null;
+      noteEl.textContent = "> connecting...";
+
+      onAuthStateChanged(auth, (user) => {
+        uid = user?.uid || null;
+        if (uid) {
+          noteEl.textContent = "> click to place (or move) your star ✦";
+        }
+      });
+
+      // Ensure we are signed in (anonymous)
+      signInAnonymously(auth).catch((err) => {
+        console.error("Anonymous auth error:", err);
+        noteEl.textContent = "> could not connect (auth).";
+      });
+
       // Click listener on OUTER sky, coordinates calculated against INNER sky
       skyOuter.addEventListener("click", async (event) => {
         if (event.target.closest(".star-color-swatch")) return;
+
+        if (!uid) {
+          noteEl.textContent = "> connecting... try again in a second.";
+          return;
+        }
 
         const rect = skyInner.getBoundingClientRect();
         const x = (event.clientX - rect.left) / rect.width;
@@ -151,13 +180,17 @@
         if (x < 0 || x > 1 || y < 0 || y > 1) return;
 
         try {
-          await addDoc(starsCol, {
+          await setDoc(
+            doc(db, "starsByUser", uid),
+            {
             x,
             y,
             color: selectedColor,
             timestamp: serverTimestamp()
-          });
-          noteEl.textContent = "> thank you for leaving a star ✦";
+            },
+            { merge: true }
+          );
+          noteEl.textContent = "> saved ✦ (click again to move it)";
         } catch (err) {
           console.error("Error saving star:", err);
           noteEl.textContent = "> could not save your star, please try again.";
