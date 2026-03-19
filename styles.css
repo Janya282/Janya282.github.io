@@ -932,7 +932,7 @@ body {
 
 .project-image--space-zoom-out {
   /* Zoom out a lot on the small card thumbnail */
-  object-position: center;
+  object-position: center 18%;
   transform: scale(1.02);
   transform-origin: center;
   opacity: 0.84;
