@@ -259,21 +259,23 @@ body {
 
 .icon-mail,
 .icon-pin {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 24px;
   height: 24px;
   border-radius: 6px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-main);
 }
 
-.icon-mail {
-  background-image: url("https://www.figma.com/api/mcp/asset/f4e65554-89d4-43aa-8a0d-bb039cea0581");
+.icon-mail::before {
+  content: "✉";
 }
 
-.icon-pin {
-  background-image: url("https://www.figma.com/api/mcp/asset/d1a9d40b-1f3a-4267-bba0-4a3fa8056c43");
+.icon-pin::before {
+  content: "📍";
 }
 
 .contact-card-label {
@@ -577,8 +579,16 @@ body {
 }
 
 .contact-link-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 32px;
   height: 32px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--accent-blue);
+  font-family: "Space Mono", monospace;
+  margin-right: 8px;
 }
 
 .home-page {
@@ -1186,9 +1196,14 @@ body {
 }
 
 .home-intro-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 34px;
   height: 34px;
   transition: transform 160ms ease;
+  font-size: 24px;
+  line-height: 1;
 }
 
 .home-intro-button:hover,
@@ -1275,10 +1290,33 @@ body {
 
 .home-intro-card-icon-img {
   position: absolute;
-  left: 12px;
-  top: 10px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   width: 30px;
   height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.icon-user::before {
+  content: "👤";
+}
+
+.icon-code::before {
+  content: "<>";
+  font-family: "Space Mono", monospace;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--accent-blue);
+}
+
+.icon-star::before {
+  content: "★";
+  color: var(--accent-pink);
 }
 
 .home-intro-card-title {
