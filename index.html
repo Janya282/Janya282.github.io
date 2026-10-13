@@ -1,0 +1,236 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset=utf8>
+  <meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <style>
+    :root {
+      color-scheme: light;
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px)
+    }
+    html { scroll-padding-top: env(safe-area-inset-top, 0px) }
+    body { margin: 0; padding: 0; font: 14px -apple-system, BlinkMacSystemFont, sans-serif; background: #fff; color: #000 }
+    img { max-width: 100% }
+    [hidden]:not([hidden=until-found i]) { display: none !important }
+  </style>
+</head>
+<body>
+<title>Janya Walia Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Caveat:wght@600&family=Figtree:wght@400;500;600;700&family=Fredoka:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&family=VT323&display=swap">
+<link rel="stylesheet" href="css/styles.css">
+
+
+<div id="app">
+  <canvas id="scene" tabindex="-1" aria-label="Janya's cozy 3D room. Use the buttons along the bottom to explore without a mouse."></canvas>
+
+  <header class="title roomui" id="title">
+    <span class="eyebrow">welcome to</span>
+    <h1>Janya<span>'</span>s room</h1>
+    <p>Creative developer · Computer Science @ Laurier · Waterloo, ON</p>
+  </header>
+
+  <button class="iconbtn card roomui" id="time-btn" aria-label="Switch to night">☀</button>
+  <button class="iconbtn card roomui" id="sound-btn" aria-label="Turn sound off">♪</button>
+
+  <nav class="dock card roomui" aria-label="Room">
+    <button class="primary" id="site-btn">← My website</button>
+    <span class="sep" aria-hidden="true"></span>
+    <button data-open="resume">Résumé</button>
+    <button data-open="contact">Contact</button>
+    <button id="reset-btn" title="Back to the room view" aria-label="Reset view"><span class="hide-sm">Reset view</span><span class="show-sm">↺</span></button>
+  </nav>
+
+  <div id="hint" class="roomui gone">Click the pink dots to explore · drag to look around · scroll to zoom</div>
+  <div id="labels" class="roomui" aria-label="Things you can click"></div>
+  <div id="tooltip"></div>
+  <div id="toast" class="card" role="status" aria-live="polite"></div>
+
+  <aside class="panel card" id="panel" hidden aria-live="polite">
+    <button class="panel-close" id="panel-close" aria-label="Close">✕</button>
+    <div class="panel-scroll" id="panel-body"></div>
+  </aside>
+
+  <div class="welcome" id="welcome" hidden role="dialog" aria-labelledby="w-title">
+    <div class="w-card card">
+      <h2 id="w-title">Welcome to my room ♡</h2>
+      <p>Everything about me is in here!</p>
+      <ul class="w-legend">
+        <li><span class="k dot" aria-hidden="true"></span><span id="w-l1">Click the pink dots</span></li>
+        <li><span class="k" aria-hidden="true">↻</span><span id="w-l2">Drag to look around</span></li>
+        <li><span class="k" aria-hidden="true">▣</span><span>Monitor = back to my site</span></li>
+      </ul>
+      <div class="w-actions">
+        <button class="btn primary" id="w-go">Explore</button>
+        <button class="btn" id="w-back">Back to site</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="site" class="intro" aria-label="Janya Walia's portfolio website">
+    <div class="w-glow" aria-hidden="true"></div>
+    <div class="site-inner" id="site-inner">
+      <div class="w-navwrap">
+        <header class="w-nav">
+          <button class="w-brand" data-scroll="top" aria-label="Back to top">Janya<i>•</i>Walia</button>
+          <nav class="w-pillnav" aria-label="Site">
+            <button data-scroll="work">Work</button>
+            <button class="w-hide-sm" data-scroll="experience">Experience</button>
+            <button class="w-hide-sm" data-scroll="contact">Contact</button>
+            <button class="w-about" data-scroll="room">3D Room<i>✦</i></button>
+          </nav>
+          <div class="w-social">
+            <a href="mailto:janyawalia282@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/janya-walia/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+            <a href="https://github.com/Janya282" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.58v-2.02c-3.34.73-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .32.21.7.82.58A12 12 0 0 0 12 .3"/></svg></a>
+            <a href="https://www.behance.net/janyawalia565" target="_blank" rel="noopener" aria-label="Behance" title="Behance"><svg viewBox="2.6 4 16 16" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M8.23 11.44c.73-.35 1.1-.9 1.1-1.64 0-1.48-1.1-1.84-2.37-1.84H3.5v8.06h3.57c1.34 0 2.6-.64 2.6-2.14 0-.93-.44-1.62-1.44-1.9v-.54zm-3.15-2.3h1.52c.58 0 1.1.16 1.1.84 0 .62-.41.87-.98.87H5.08V9.14zm1.73 5.2H5.08v-2.22h1.76c.71 0 1.16.3 1.16 1.05 0 .74-.54 1.17-1.19 1.17zM14.85 9.47c-1.9 0-3.2 1.43-3.2 3.31 0 1.95 1.23 3.29 3.2 3.29 1.5 0 2.46-.67 2.93-2.1h-1.52c-.16.53-.84.81-1.36.81-1 0-1.53-.59-1.53-1.59h4.49c.07-2-1.05-3.72-3.01-3.72zm-1.48 2.64c.06-.82.6-1.33 1.42-1.33.86 0 1.29.5 1.36 1.33h-2.78zM13.1 7.9h3.48v.85H13.1z"/></svg></a>
+            <a href="Janya_Walia_Resume.pdf" target="_blank" rel="noopener">CV</a>
+          </div>
+        </header>
+      </div>
+
+      <section class="w-hero" id="w-top">
+        <div class="w-trail" id="w-trail" aria-hidden="true"></div>
+        <p class="w-trail-hint" id="w-trail-hint" aria-hidden="true"><b></b><span>move your cursor: these are my tools</span></p>
+        <p class="w-role">Creative Developer &amp; UX Designer</p>
+        <h1 class="w-name" aria-label="Janya Walia"><span class="w-line"><span>Janya</span></span><span class="w-reel" id="w-reel" aria-hidden="true"></span><span class="w-line"><span>Walia</span></span></h1>
+        <div class="w-hero-row">
+          <div class="w-hero-ctas">
+            <button class="w-teaser" data-scroll="room"><span></span> There's a 3D room behind this site <b>→</b></button>
+          </div>
+          <div class="w-hero-foot"><span>BSc Computer Science @ Wilfrid Laurier University</span><button data-scroll="statement">Scroll ↓</button></div>
+        </div>
+      </section>
+
+      <section class="w-statement" id="w-statement">
+        <p class="w-hi" aria-hidden="true">hi, i'm janya ♡</p>
+        <p class="w-big" id="w-big"></p>
+      </section>
+
+      <section class="w-work" id="w-work"></section>
+
+      <section class="w-room" id="w-room">
+        <p class="w-giant" aria-hidden="true">3D room</p>
+        <div class="w-portal-head">
+          <p class="w-cat-k">✦ about me, but in 3D</p>
+          <h2>Step out of this <em>screen</em></h2>
+          <p>My about me page isn't a page. It's a little 3D room hiding behind this website, filled with all kinds of information about me.</p>
+        </div>
+        <button class="w-portal" data-room aria-label="Enter my 3D room">
+          <canvas id="w-preview" aria-hidden="true"></canvas>
+          <span class="w-poster">warming up the room…</span>
+          <span class="w-live-tag"><i aria-hidden="true"></i>LIVE · interactive 3D</span>
+          <span class="w-portal-chips" aria-hidden="true"><span>drag to look around</span><span>click anything with a dot</span></span>
+          <span class="w-portal-cta">Enter my room <b>→</b></span>
+        </button>
+      </section>
+
+      <section class="w-dark" id="w-experience">
+        <h2 class="w-split"><span class="l1">Where I’ve been,</span><span class="l2">&amp; what I’ve been up to.</span></h2>
+        <div class="w-tl-head"><h3>Experience</h3><p>2023 → now</p></div>
+        <div class="w-tl" id="w-tl">
+          <div class="w-tl-rail" aria-hidden="true"><i></i></div>
+          <article class="w-tl-item now rv">
+            <div class="w-tl-when"><b>2025 — Now</b><span>Sep 2025 – present</span></div>
+            <span class="w-tl-node" aria-hidden="true"></span>
+            <div class="w-tl-card">
+              <p class="w-tl-org">Laurier STEM Publishing Society</p>
+              <h4>VP of Web Development<span class="w-now">now</span></h4>
+              <p>I lead the design, development and maintenance of the club's website, and set shared component standards that cut the team's page build time.</p>
+              <ul class="w-tl-tags"><li>Figma</li><li>HTML/CSS</li><li>JavaScript</li><li>Leadership</li></ul>
+            </div>
+          </article>
+          <article class="w-tl-item rv">
+            <div class="w-tl-when"><b>2025 — 26</b><span>Sep 2025 – Apr 2026</span></div>
+            <span class="w-tl-node" aria-hidden="true"></span>
+            <div class="w-tl-card">
+              <p class="w-tl-org">Wilfrid Laurier University</p>
+              <h4>Academic Tutor, CP104</h4>
+              <p>Made sure first year students understood intro programming, adjusting every explanation to the person in front of me.</p>
+              <ul class="w-tl-tags"><li>Teaching</li><li>Intro programming</li></ul>
+            </div>
+          </article>
+          <article class="w-tl-item rv">
+            <div class="w-tl-when"><b>2025</b><span>Mar – Aug 2025</span></div>
+            <span class="w-tl-node" aria-hidden="true"></span>
+            <div class="w-tl-card">
+              <p class="w-tl-org">A to Z Tutoring</p>
+              <h4>Tutor</h4>
+              <p>Academic support in coding, math and English for kids, with personalized learning plans and progress tracking.</p>
+              <ul class="w-tl-tags"><li>Coding</li><li>Math</li><li>English</li></ul>
+            </div>
+          </article>
+          <article class="w-tl-item rv">
+            <div class="w-tl-when"><b>2023</b><span>Jun – Aug 2023</span></div>
+            <span class="w-tl-node" aria-hidden="true"></span>
+            <div class="w-tl-card">
+              <p class="w-tl-org">CreateUCamps</p>
+              <h4>Camp Counselor</h4>
+              <p>Kept campers safe and on track by enforcing camp rules, prepped materials and supplies for each activity, and worked with the recreation team to develop new activities.</p>
+              <ul class="w-tl-tags"><li>Leadership</li><li>Teamwork</li><li>Activity planning</li></ul>
+            </div>
+          </article>
+          <article class="w-tl-item edu rv">
+            <div class="w-tl-when"><b>2023 — 27</b><span>graduating 2027</span></div>
+            <span class="w-tl-node" aria-hidden="true"></span>
+            <div class="w-tl-card">
+              <p class="w-tl-org">Education · Wilfrid Laurier University</p>
+              <h4>Honours BSc Computer Science</h4>
+              <p>Minor in UX Design and an Undergraduate Certificate in Generative AI.</p>
+              <ul class="w-tl-tags"><li>UX Design minor</li><li>Generative AI certificate</li></ul>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="w-tickers" aria-label="Tools I use">
+        <div class="w-ticker w-tk1" id="w-tk1"></div>
+        <div class="w-ticker w-tk2" id="w-tk2"></div>
+      </section>
+
+      <section class="w-contact" id="w-contact">
+        <div class="w-contact-main">
+          <p class="w-kick">// contact</p>
+          <h2 class="rv">Say <em>hi</em>, I'd love to hear from you.</h2>
+          <div class="w-mail"><code>janyawalia282@gmail.com</code><button class="w-btn" data-copy="janyawalia282@gmail.com">Copy</button></div>
+          <div class="w-links">
+            <a class="w-btn ghost" href="https://www.linkedin.com/in/janya-walia/" target="_blank" rel="noopener">LinkedIn ↗</a>
+            <a class="w-btn ghost" href="https://github.com/Janya282" target="_blank" rel="noopener">GitHub ↗</a>
+            <a class="w-btn ghost" href="https://www.behance.net/janyawalia565" target="_blank" rel="noopener">Behance ↗</a>
+          <a class="w-btn ghost" href="Janya_Walia_Resume.pdf" target="_blank" rel="noopener">Résumé ↗</a>
+          </div>
+        </div>
+        <div class="w-contact-cat">
+          <figure class="w-cat-win">
+            <div class="w-cat-bar" aria-hidden="true"><i></i><i></i><i></i><span>janya.exe</span></div>
+            <img src="img/cat-typing.gif" alt="A cat typing very fast on a laptop" width="300" height="300" loading="lazy">
+          </figure>
+          <p class="w-cat-cap">me, coding your next project ♡</p>
+        </div>
+      </section>
+
+      <footer class="w-foot">
+        <div class="w-foot-row"><span>Creative Developer · Waterloo · 2026</span><button data-room>There's a room behind this screen ✦</button></div>
+      </footer>
+    </div>
+    <div class="w-sheet" id="w-sheet" hidden role="dialog" aria-modal="true" aria-labelledby="cs-title">
+      <article class="ws-card" id="ws-card">
+        <header class="ws-top">
+          <div class="ws-pill"><button data-close>← All work</button></div>
+          <div class="ws-pill"><span class="ws-count" id="ws-count">01 / 07</span><button class="ws-ic" data-step="-1" aria-label="Previous project">←</button><button class="ws-ic" data-step="1" aria-label="Next project">→</button><button class="ws-ic ws-close" data-close aria-label="Close case study">✕</button></div>
+        </header>
+        <div class="ws-scroll" id="ws-scroll"></div>
+      </article>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
