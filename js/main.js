@@ -3877,6 +3877,8 @@ $ java Server &lt;port&gt; &lt;board_width&gt; &lt;board_height&gt; &lt;note_wid
   function applyTime(instant) {
     const T = isDay ? TIMES.day : TIMES.night;
     document.documentElement.dataset.time = isDay ? 'day' : 'night';
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+    if (themeMeta) themeMeta.content = getComputedStyle(document.documentElement).getPropertyValue('--bg-2').trim();
     const b = $('#time-btn');
     b.textContent = isDay ? '☀' : '☾';
     b.setAttribute('aria-label', isDay ? 'Switch to night' : 'Switch to day');

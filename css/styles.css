@@ -36,6 +36,10 @@ html,
 body {
   height: 100%
 }
+html {
+  /* solid edge colour so Safari tints its top and bottom bars to match (it can't sample the gradient) */
+  background: var(--bg-2)
+}
 body {
   background: radial-gradient(ellipse 75% 70% at 52% 48%, var(--bg-1) 0%, var(--bg-2) 55%, var(--bg-3) 100%) var(--bg-3);
   color: var(--ink);
